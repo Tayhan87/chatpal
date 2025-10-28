@@ -22,9 +22,10 @@ class _AIChatScreenState extends State<AIChatScreen>{
 
   Future<String> fetchData() async{
 
-    String url='http://192.168.0.109:8000/api/';
-   final response =await http.post(Uri.parse
-     (url),
+    const String baseUrl = "http://192.168.0.109:8000/api/";
+
+    final response =await http.post(Uri.parse
+     (baseUrl),
     headers:{'Content-Type':'application/json'},
      body:jsonEncode({"messages":_messages.map((m)=>{
      "role": m.isUser ? "user" : "assistant",
@@ -134,7 +135,7 @@ void _scrollToBottom(){
                 ),
                 SizedBox(width:8),
 
-                Text("AI Chat Interface",
+                Text("AI Tutor",
                   style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
