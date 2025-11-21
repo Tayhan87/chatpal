@@ -135,13 +135,7 @@ void _scrollToBottom(){
                 ),
                 SizedBox(width:8),
 
-                Text("AI Tutor",
-                  style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black54
-                  ),
-                ),
+                Text("AI Tutor", style: AppTheme.Titlefont,),
 
               ],
             ),

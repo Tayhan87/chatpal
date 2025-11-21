@@ -3,7 +3,11 @@ import "../theme/theme.dart";
 
 class DashboardScreen extends StatelessWidget {
   final VoidCallback onAIChatTap;
-  const DashboardScreen({super.key, required this.onAIChatTap});
+  final VoidCallback onQuizTap;
+  const DashboardScreen({
+    super.key,
+    required this.onAIChatTap,
+    required this.onQuizTap});
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +48,12 @@ class DashboardScreen extends StatelessWidget {
                   width: 400,
                   child: _buildCardAI(context),
               ),
+              SizedBox(height: 20,),
+              Container(
+                height: 150,
+                width:400,
+                child: _buildQuizAI(context),
+              )
 
             ],
           ),
@@ -73,6 +83,15 @@ class DashboardScreen extends StatelessWidget {
     );
   }
   
+  TextStyle _buildTextStyleCard(BuildContext context){
+    return const TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      fontFamily: "Inter",
+      color: Colors.black54,
+    );
+  }
+  
   Card _buildCardAI(BuildContext context){
     return Card(
       elevation: 12,
@@ -92,7 +111,7 @@ class DashboardScreen extends StatelessWidget {
                   children: [
                     Icon(Icons.smart_toy_outlined,size:70,color: Color(0xFF96A3F6)),
                     SizedBox(height: 5,),
-                    Text("AI Chat")
+                    Text("AI Chat",style: _buildTextStyleCard(context),)
                   ]
               ),
             ],
@@ -101,5 +120,33 @@ class DashboardScreen extends StatelessWidget {
       ),
     );
   }
+  Card _buildQuizAI(BuildContext context){
+    return Card(
+      elevation:12,
+      shape:RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+      color: Color(0xFFE9EEFE),
+      child: InkWell(
+        onTap: onQuizTap,
+        child: Padding(
+          padding: EdgeInsets.only(left:24,top:24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                children: [
+                  Icon(Icons.book_outlined,size: 70,color: Color(0xFF96A3F6)),
+                  SizedBox(height: 5,),
+                  Text("Quiz",style: _buildTextStyleCard(context),)
+                ],
+              ),
+
+            ],
+          ),
+        ),
+      ),
+    );
+}
 
 }

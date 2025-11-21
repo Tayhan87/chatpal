@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "screen/dashboard.dart";
 import "screen/aichatscreen.dart";
+import "screen/quizscreen.dart";
 
 void main()=>runApp(CramLand());
 
@@ -54,6 +55,9 @@ class _MainScreenState extends State<MainScreen>{
         onAIChatTap: (){
           setState(()=>_selectedIndex=1);
         },
+        onQuizTap: (){
+          setState(()=>_selectedIndex=2);
+        },
       ),
 
       AIChatScreen(
@@ -61,6 +65,12 @@ class _MainScreenState extends State<MainScreen>{
         setState(()=>_selectedIndex=0);
         }
       ),
+      QuizScreen(
+          onBackTap: (){
+        setState(()=>_selectedIndex=0);
+        }
+      ),
+
 
   ];
   }

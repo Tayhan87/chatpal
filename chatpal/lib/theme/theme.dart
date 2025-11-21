@@ -12,4 +12,12 @@ class AppTheme{
     ),
   );
 
+  static TextStyle get Titlefont =>const TextStyle(
+    fontSize: 28,
+    fontWeight: FontWeight.bold,
+    color: Colors.black54,
+  ) ;
+
 }
+
+
