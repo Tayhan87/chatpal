@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# Allow the Flutter app to talk to the server
+CORS_ALLOW_ALL_ORIGINS = True 
 
 
 # Application definition
@@ -40,9 +42,24 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # This line enables the 'Authorization: Token <key>' header
+        'rest_framework.authentication.TokenAuthentication', 
+        
+        # This allows the browsable API to work while you develop
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # Must be at the top
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

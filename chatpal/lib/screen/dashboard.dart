@@ -5,12 +5,18 @@ class DashboardScreen extends StatelessWidget {
   final VoidCallback onAIChatTap;
   final VoidCallback onQuizTap;
   final VoidCallback onTestTap;
+  final VoidCallback onLogoutTap;
+  final VoidCallback onPomodoroTap;
+  final VoidCallback onFlashCardTap;
 
   const DashboardScreen({
     super.key,
     required this.onAIChatTap,
     required this.onQuizTap,
     required this.onTestTap,
+    required this.onLogoutTap,
+    required this.onPomodoroTap,
+    required this.onFlashCardTap,
   });
 
   @override
@@ -34,38 +40,50 @@ class DashboardScreen extends StatelessWidget {
                       "CramLand",
                       style: _buildTextStyleCram(context),
                     ),
-                    const CircleAvatar(
-                      radius: 24,
-                      backgroundColor: Colors.black26,
-                      child: Icon(
-                        Icons.person,
-                        size: 30,
+
+                    IconButton(
+                      onPressed: onLogoutTap,
+                      icon: const Icon(
+                        Icons.logout_rounded,
                         color: Colors.white70,
+                        size: 28,
                       ),
+                      tooltip: 'Logout',
                     ),
                   ],
                 ),
+
                 const SizedBox(height: 20),
                 Text(
-                  "Welcome Back \nTayhan!",
+                  "Welcome Back \nSolder!",
                   style: _buildTextStyleWel(context),
                 ),
                 const SizedBox(height: 32),
 
-                // --- CARDS ---
-                // 2. Removed 'width: 400'. The cards now fill the screen width.
                 _DasBoardCard(
                   icon: Icons.smart_toy_outlined,
                   title: "AI Chat",
-                  colorAccent: const Color(0xFF96A3F6), // Light Purple Icon
+                  colorAccent: const Color(0xFF96A3F6),
                   onTap: onAIChatTap,
                 ),
                 const SizedBox(height: 20),
                 _DasBoardCard(
                   icon: Icons.book_outlined,
                   title: "Quiz",
-                  colorAccent: const Color(0xFFF6A396), // Light Red Icon
+                  colorAccent: const Color(0xFFF6A396),
                   onTap: onQuizTap,
+                ),
+                const SizedBox(height: 20),
+                _DasBoardCard(
+                    icon: Icons.timer,
+                    title: "Pomodoro Timer",
+                    onTap: onPomodoroTap,
+                ),
+                const SizedBox(height: 20),
+                _DasBoardCard(
+                    icon: Icons.note,
+                    title: "Flash Note",
+                    onTap: onFlashCardTap
                 ),
 
               ],

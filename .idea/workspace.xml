@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd2c93af-2247-44af-80ec-39bc87ffb500" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/server/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/server/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +52,7 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
@@ -58,8 +61,9 @@
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/tayhan/development/Android Studio 2025.1.3.7-Linux/android-studio/jbr&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/tayhan/development/Flutter/flutter/bin/cache/dart-sdk&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
 }</component>

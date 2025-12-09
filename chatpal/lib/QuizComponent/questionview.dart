@@ -30,8 +30,6 @@ class QuizView extends StatelessWidget{
     final isLastQuestion = currentQuestionIndex == Questions.length-1;
     final allQuestionAnswered = selectedAnswers.length==Questions.length;
 
-
-
     return Column(
       children: [
         Container(
