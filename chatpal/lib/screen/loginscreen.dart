@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
         // Optional: Store token or user data here
         // SharedPreferences prefs = await SharedPreferences.getInstance();
-        // await prefs.setString('token', data['token']);
+        await prefs.setString('token', data['token']);
 
         // Navigate to next screen
         await Future.delayed(const Duration(milliseconds: 500));

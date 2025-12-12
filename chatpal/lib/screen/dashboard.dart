@@ -4,7 +4,6 @@ import "../theme/theme.dart";
 class DashboardScreen extends StatelessWidget {
   final VoidCallback onAIChatTap;
   final VoidCallback onQuizTap;
-  final VoidCallback onTestTap;
   final VoidCallback onLogoutTap;
   final VoidCallback onPomodoroTap;
   final VoidCallback onFlashCardTap;
@@ -13,7 +12,6 @@ class DashboardScreen extends StatelessWidget {
     super.key,
     required this.onAIChatTap,
     required this.onQuizTap,
-    required this.onTestTap,
     required this.onLogoutTap,
     required this.onPomodoroTap,
     required this.onFlashCardTap,
@@ -26,13 +24,13 @@ class DashboardScreen extends StatelessWidget {
       width: double.infinity,
       height: double.infinity,
       child: SafeArea(
-        child: SingleChildScrollView( // 1. Added Scrolling to prevent overflow
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(24.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // --- HEADER ---
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -83,6 +81,7 @@ class DashboardScreen extends StatelessWidget {
                 _DasBoardCard(
                     icon: Icons.note,
                     title: "Flash Note",
+                    colorAccent: const Color(0xFFF6A396),
                     onTap: onFlashCardTap
                 ),
 
@@ -128,11 +127,10 @@ class _DasBoardCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity, // Fills the width of the parent (padding)
+      width: double.infinity,
       height: 150,
       child: Card(
         elevation: 8,
-        // Clip behavior ensures the InkWell ripple stays inside the rounded corners
         clipBehavior: Clip.hardEdge,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
@@ -142,7 +140,7 @@ class _DasBoardCard extends StatelessWidget {
           onTap: onTap,
           splashColor: colorAccent.withOpacity(0.3),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // 3. Centered content
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(icon, size: 60, color: colorAccent),
               const SizedBox(height: 10),

@@ -46,7 +46,6 @@ class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   bool _isLoading = false;
 
-  // --- 1. The Logout Logic ---
   Future<void> _handleLogout(BuildContext context) async {
     setState(() => _isLoading = true);
 
@@ -99,29 +98,24 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // --- 2. Define screens in build to ensure they use the latest context ---
+
     final List<Widget> screens = [
       DashboardScreen(
         onAIChatTap: () {
-          setState(() => _selectedIndex = 2); // Corrected to Index 2
+          setState(() => _selectedIndex = 1);
         },
         onQuizTap: () {
-          setState(() => _selectedIndex = 3); // Corrected to Index 3
-        },
-        onTestTap: () {
-          setState(() => _selectedIndex = 3); // Mapped to Quiz for now
+          setState(() => _selectedIndex = 2);
         },
         onPomodoroTap:(){
-          setState(() => _selectedIndex = 4); // Corrected to Index 4
+          setState(() => _selectedIndex = 3);
         },
         onFlashCardTap:(){
-          setState(() => _selectedIndex = 1); // Fixed typo (== to =) and Index 1
+          setState(() => _selectedIndex = 4);
         },
         onLogoutTap: () => _handleLogout(context),
       ),
-      FlashCardScreen(onBackTap: (){
-        setState(() => _selectedIndex = 0);
-      }),
+
       AIChatScreen(onBackTap: () {
         setState(() => _selectedIndex = 0);
       }),
@@ -131,10 +125,13 @@ class _MainScreenState extends State<MainScreen> {
       PomodoroScreen(onBackTap: (){
         setState(()=>_selectedIndex = 0);
       }),
+      FlashCardScreen(onBackTap: (){
+        setState(() => _selectedIndex = 0);
+      }),
     ];
 
     return Scaffold(
-      // --- 3. Optional: Show a generic loading overlay if logging out ---
+
       body: Stack(
         children: [
           IndexedStack(

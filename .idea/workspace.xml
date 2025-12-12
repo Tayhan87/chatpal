@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd2c93af-2247-44af-80ec-39bc87ffb500" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/server/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/server/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/server/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +70,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/chatpal/lib/QuizComponent" />
       <recent name="$PROJECT_DIR$/chatpal/lib" />
     </key>
   </component>

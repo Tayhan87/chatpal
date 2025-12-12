@@ -1,21 +1,35 @@
-import "package:flutter/material.dart";
-
-class Question{
+class Question {
   final String questionText;
-  final List<String>Options;
-  final String answer;
+  final List<String> Options;
+  final String answer; // Keep for backward compatibility
+  final String correctAnswer; // For checking answers
 
   Question({
-    required this.answer,
-    required this.Options,
     required this.questionText,
-  });
+    required this.Options,
+    required this.answer,
+  }) : correctAnswer = answer; // Same value for both
 
-  factory Question.fromJson(Map<String,dynamic>json){
+  // Alternative constructor if you want to be explicit
+  Question.withAnswer({
+    required this.questionText,
+    required this.Options,
+    required this.correctAnswer,
+  })  : answer = correctAnswer;
+
+  factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
-      answer:json['answer'] ,
-      Options: List<String>.from(json['options']),
-      questionText: json['question'],
+      questionText: json['question'] ?? '',
+      Options: List<String>.from(json['options'] ?? []),
+      answer: json['correct_answer'] ?? json['answer'] ?? '',
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'question': questionText,
+      'options': Options,
+      'correct_answer': correctAnswer,
+    };
   }
 }

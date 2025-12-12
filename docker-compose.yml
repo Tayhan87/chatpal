@@ -1,0 +1,13 @@
+services:
+  backend:
+    build: ./server
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server:/app
+
+  frontend:
+    build: ./chatpal
+    volumes:
+      - ./chatpal:/app
+    command: flutter build apk

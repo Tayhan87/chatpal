@@ -2,22 +2,15 @@ from django.db import models
 from django.conf import settings
 
 class StudyMaterial(models.Model):
-    # ADDED null=True to prevent migration prompt for existing data
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, 
-        on_delete=models.CASCADE,
-        related_name='study_materials',
-        null=True,  
-        blank=True
-    )
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='study_materials', null=True,  blank=True)
     title = models.CharField(max_length=255, blank=True)
     content_text = models.TextField(help_text="Text extracted from the PDF")
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        # Handle case where user is None (because of null=True)
         username = self.user.username if self.user else "Unknown User"
         return f"{self.title} ({username})"
+
 
 class Quiz(models.Model):
     study_material = models.ForeignKey(
@@ -26,14 +19,14 @@ class Quiz(models.Model):
         related_name='quizzes'
     )
     title = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)  # ADD THIS LINE
     
     def __str__(self):
         return self.title
 
+
 class Question(models.Model):
-    QUESTION_TYPES = (
-        ('MCQ', 'Multiple Choice'),
-    )
+    QUESTION_TYPES = (('MCQ', 'Multiple Choice'),)
 
     quiz = models.ForeignKey(
         Quiz, 
@@ -48,9 +41,19 @@ class Question(models.Model):
 
     def __str__(self):
         return f"{self.text[:50]}..."
+    
+
+class FlashCard(models.Model):
+    study_material = models.ForeignKey(StudyMaterial, on_delete=models.CASCADE, related_name='flashcards')
+    front = models.TextField(help_text="The question or concept")
+    back = models.TextField(help_text="The answer or definition")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.front[:30]}..."
+
 
 class QuestionAttempt(models.Model):
-    # ADDED null=True here too, or it will ask for a default User ID next
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -65,10 +68,6 @@ class QuestionAttempt(models.Model):
     )
     student_answer = models.CharField(max_length=255)
     is_correct = models.BooleanField()
-    
-    # --- THIS FIXES YOUR SPECIFIC ERROR ---
-    # We add null=True so existing rows don't need a timestamp immediately.
-    # auto_now_add will still fill it in for NEW rows automatically.
     timestamp = models.DateTimeField(auto_now_add=True, null=True) 
 
     def __str__(self):

@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../theme/theme.dart'; // Ensure this path is correct for your project
+import '../theme/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class TestScreen extends StatefulWidget {
+class PDFTitleView extends StatefulWidget {
   final VoidCallback onUploadFileTap;
   final Function(String) onGenerateQuizTap;
 
-  const TestScreen({
+  const PDFTitleView({
     Key? key,
     required this.onUploadFileTap,
     required this.onGenerateQuizTap,
   }) : super(key: key);
 
   @override
-  State<TestScreen> createState() => _TestScreenState();
+  State<PDFTitleView> createState() => _PDFTitleState();
 }
 
-class _TestScreenState extends State<TestScreen> {
-  // Store the full objects (Maps), not just strings
+class _PDFTitleState extends State<PDFTitleView> {
+
   List<dynamic> _documents = [];
   bool _isLoading = true;
   int? _selectedindex;
+
+  final String BackEndUrl = 'http://192.168.0.109:8000/api';
 
   @override
   void initState() {
@@ -29,18 +32,123 @@ class _TestScreenState extends State<TestScreen> {
     _fetchdata();
   }
 
-  Future<void> _fetchdata() async {
-    // Use 10.0.2.2 for Emulator, 192.168... for Device
-    // Ensure this matches your backend URL (remove 'quiz/' if needed based on previous steps)
-    final url = Uri.parse("http://192.168.0.109:8000/api/sentences/");
+
+
+  Future<void> _deleteDocument(int index) async {
+    final document = _documents[index];
+    final docId = document['id'].toString();
+
+    final url = Uri.parse("$BackEndUrl/delete_pdf/$docId/");
+
+    final prefs = await SharedPreferences.getInstance();
+    final String? token = prefs.getString("token");
 
     try {
-      final response = await http.get(url);
+      final response = await http.delete(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Token $token",
+        },
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 204) {
+        if (mounted) {
+          setState(() {
+            _documents.removeAt(index);
+            if (_selectedindex == index) {
+              _selectedindex = null;
+            } else if (_selectedindex != null && _selectedindex! > index) {
+              _selectedindex = _selectedindex! - 1;
+            }
+          });
+        }
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Document deleted successfully'),
+              backgroundColor: Colors.green,
+            ),
+          );
+        }
+      } else {
+        print("Error deleting document: ${response.statusCode}");
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Failed to delete document: ${response.statusCode}'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      print("Exception deleting document: $e");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
+  void _showDeleteDialog(int index) {
+    final document = _documents[index];
+    final title = document['title'].toString();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Delete Document'),
+          content: Text('Are you sure you want to delete "$title"?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _deleteDocument(index);
+              },
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
+              child: const Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+
+
+
+  Future<void> _fetchdata() async {
+
+    final url = Uri.parse("$BackEndUrl/pdf_titles/");
+
+    final prefs= await SharedPreferences.getInstance();
+    final String?  token = prefs.getString("token");
+
+    print("Using Token: $token");
+
+    try {
+      final response = await http.get(
+          url,
+        headers:{
+            "Content-Type":"application/json",
+            "Authorization" :"Token $token",
+        },
+      );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
 
-        // Handle if the key is 'sentences' or 'documents'
-        final List<dynamic> docList = data['sentences'] ?? data['documents'] ?? [];
+        final List<dynamic> docList = data['titles']  ?? [];
 
         if (mounted) {
           setState(() {
@@ -75,7 +183,6 @@ class _TestScreenState extends State<TestScreen> {
                     side: BorderSide(color: Colors.green.shade300, width: 2),
                     borderRadius: BorderRadius.circular(16),
                   )),
-              // 3. Trigger the Parent's callback
               onPressed: widget.onUploadFileTap,
               label: const Text("Upload File", style: TextStyle(fontSize: 15)),
             ),
@@ -138,6 +245,7 @@ class _TestScreenState extends State<TestScreen> {
                         else
                           _selectedindex = index;
                       }),
+                      onLongPress: () => _showDeleteDialog(index),
                       title: Text(
                         // Display the TITLE
                         document['title'].toString(),

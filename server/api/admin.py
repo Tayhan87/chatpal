@@ -6,4 +6,5 @@ admin.site.register(Quiz)
 admin.site.register(Question)
 admin.site.register(StudyMaterial)
 admin.site.register(QuestionAttempt)
+admin.site.register(FlashCard)
 
