@@ -7,6 +7,7 @@ class UploadView extends StatelessWidget {
   final VoidCallback onClearFile;
   final VoidCallback onPickFile;
   final VoidCallback onGenerateQuiz;
+  final String fun;
 
   const UploadView({  //constructor
     super.key,
@@ -14,6 +15,7 @@ class UploadView extends StatelessWidget {
     required this.onClearFile,
     required this.onPickFile,
     required this.onGenerateQuiz,
+    required this.fun,
   });
 
   @override
@@ -46,7 +48,7 @@ class UploadView extends StatelessWidget {
               const SizedBox(height: 16,),
 
               Text(
-                "Upload a PDF to generate a quiz",
+                "Upload a PDF to generate a ${fun}",
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey.shade800,

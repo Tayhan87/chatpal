@@ -5,6 +5,7 @@ import "../theme/theme.dart";
 import '../CommonComponnent/commoncomponent.dart';
 
 
+
 class AIChatScreen extends StatefulWidget{
   final VoidCallback onBackTap;
   const AIChatScreen({super.key,required this.onBackTap});
@@ -23,10 +24,8 @@ class _AIChatScreenState extends State<AIChatScreen>{
 
   Future<String> fetchData() async{
 
-    const String baseUrl = "http://192.168.0.109:8000/api/";
-
     final response =await http.post(Uri.parse
-     (baseUrl),
+     (BackEndUrl),
     headers:{'Content-Type':'application/json'},
      body:jsonEncode({"messages":_messages.map((m)=>{
      "role": m.isUser ? "user" : "assistant",
@@ -66,8 +65,6 @@ class _AIChatScreenState extends State<AIChatScreen>{
 }
 
 void _simulateResponse(String response) async{
-
-    //setState(() => _isTyping=true);
 
     String displayed = "";
     bool firstChar = true;

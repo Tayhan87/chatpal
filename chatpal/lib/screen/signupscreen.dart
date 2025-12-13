@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../url.dart';
 
 class SignUpScreen extends StatefulWidget {
   final VoidCallback onBackToLogin;
@@ -67,8 +68,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     });
 
     try {
-      // Replace with your actual backend URL
-      final url = Uri.parse("http://192.168.0.109:8000/api/signup/");
+
+      final url = Uri.parse("${BackEndUrl}api/signup/");
 
       final response = await http.post(
         url,
@@ -83,10 +84,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (response.statusCode == 200 || response.statusCode == 201) {
         _showSuccess("Account created successfully!");
 
-        // Optional: Auto-login or store token
-        // final data = json.decode(response.body);
-        // SharedPreferences prefs = await SharedPreferences.getInstance();
-        // await prefs.setString('token', data['token']);
 
         await Future.delayed(const Duration(milliseconds: 500));
         widget.onBackToLogin();

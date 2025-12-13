@@ -7,9 +7,8 @@
     <list default="true" id="bd2c93af-2247-44af-80ec-39bc87ffb500" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/server/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/server/db.sqlite3" afterDir="false" />
     </list>

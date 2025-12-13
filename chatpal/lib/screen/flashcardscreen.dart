@@ -10,6 +10,7 @@ import '../QuizComponent/pdftitleview.dart';
 import '../FlashCardComponent/flashcard.dart';
 import '../FlashCardComponent/flashcardcomponent.dart';
 import "../theme/theme.dart";
+import '../url.dart';
 
 // Header widget component
 class Head extends StatelessWidget {
@@ -75,8 +76,6 @@ class _FlashCardScreenState extends State<FlashCardScreen> {
   bool _isLoading = true;
   int? _selectedDocId;
 
-  final String BackEndUrl = 'http://192.168.0.109:8000/api';
-
   void _clearFile() {
     setState(() {
       _selectedFile = null;
@@ -103,7 +102,7 @@ class _FlashCardScreenState extends State<FlashCardScreen> {
 
   // Fetch available documents
   Future<void> _fetchdata() async {
-    final url = Uri.parse("$BackEndUrl/pdf_titles/");
+    final url = Uri.parse("${BackEndUrl}/pdf_titles/");
     final prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString("token");
 
@@ -151,7 +150,7 @@ class _FlashCardScreenState extends State<FlashCardScreen> {
     });
 
     try {
-      var request = http.MultipartRequest("POST", Uri.parse("$BackEndUrl/makepdf/"));
+      var request = http.MultipartRequest("POST", Uri.parse("${BackEndUrl}makepdf/"));
       request.headers["Authorization"] = "Token $token";
       request.files.add(await http.MultipartFile.fromPath("pdf", _selectedFile!.path),);
 
@@ -193,7 +192,7 @@ class _FlashCardScreenState extends State<FlashCardScreen> {
 
 
     try {
-      var url = Uri.parse("$BackEndUrl/generate_flashcards_from_doc/");
+      var url = Uri.parse("${BackEndUrl}generate_flashcards_from_doc/");
       var response = await http.post(
         url,
         headers: {"Content-Type": "application/json","Authorization":"Token $token"},
@@ -278,7 +277,7 @@ class _FlashCardScreenState extends State<FlashCardScreen> {
 
 
   Widget _buildBody() {
-    if (_isGenerating) return LoadView();
+    if (_isGenerating) return LoadView(fun: "Flash Card",);
 
     if (_flashCards != null && _flashCards!.isNotEmpty) {
       return FlashCardView(
@@ -309,6 +308,7 @@ class _FlashCardScreenState extends State<FlashCardScreen> {
               onClearFile: _clearFile,
               onPickFile: _pickFiles,
               onGenerateQuiz: _GeneratePDFFromFile,
+              fun:"Flash Card",
             ),
           ),
         ],
@@ -321,6 +321,7 @@ class _FlashCardScreenState extends State<FlashCardScreen> {
           _showUploadView = true;
         });
       },
+      fun:"Generate Flash Card",
       onGenerateQuizTap: (String docIdString) {
         print("User selected document ID: $docIdString");
         try {

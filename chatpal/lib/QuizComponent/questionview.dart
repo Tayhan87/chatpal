@@ -1,6 +1,8 @@
 import 'package:chatpal/screen/quizscreen.dart';
 import 'package:flutter/material.dart';
 import 'question.dart';
+import '../url.dart';
+
 
 class QuizView extends StatelessWidget {
   final List<Question> Questions;

@@ -23,7 +23,7 @@ load_dotenv()
 #openai.api_key = os.getenv("OPENAI_API_KEY")
 #genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-genai.configure(api_key="AIzaSyBm-xhosYOPrE6eDzg4S_xQhNNk660Ug6I")
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel('gemini-flash-latest')
 
 @api_view(['POST'])

@@ -3,15 +3,18 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../theme/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../url.dart';
 
 class PDFTitleView extends StatefulWidget {
   final VoidCallback onUploadFileTap;
   final Function(String) onGenerateQuizTap;
+  final String fun;
 
   const PDFTitleView({
     Key? key,
     required this.onUploadFileTap,
     required this.onGenerateQuizTap,
+    required this.fun,
   }) : super(key: key);
 
   @override
@@ -24,7 +27,6 @@ class _PDFTitleState extends State<PDFTitleView> {
   bool _isLoading = true;
   int? _selectedindex;
 
-  final String BackEndUrl = 'http://192.168.0.109:8000/api';
 
   @override
   void initState() {
@@ -38,7 +40,7 @@ class _PDFTitleState extends State<PDFTitleView> {
     final document = _documents[index];
     final docId = document['id'].toString();
 
-    final url = Uri.parse("$BackEndUrl/delete_pdf/$docId/");
+    final url = Uri.parse("${BackEndUrl}delete_pdf/$docId/");
 
     final prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString("token");
@@ -130,7 +132,7 @@ class _PDFTitleState extends State<PDFTitleView> {
 
   Future<void> _fetchdata() async {
 
-    final url = Uri.parse("$BackEndUrl/pdf_titles/");
+    final url = Uri.parse("${BackEndUrl}pdf_titles/");
 
     final prefs= await SharedPreferences.getInstance();
     final String?  token = prefs.getString("token");
@@ -208,7 +210,7 @@ class _PDFTitleState extends State<PDFTitleView> {
                   widget.onGenerateQuizTap(docId);
                 }
                     : null,
-                label: const Text("Generate Quiz", style: TextStyle(fontSize: 15))),
+                label: Text(widget.fun, style: TextStyle(fontSize: 15))),
           ],
         ),
         const SizedBox(height: 50),

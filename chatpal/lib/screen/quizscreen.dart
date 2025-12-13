@@ -11,6 +11,7 @@ import '../QuizComponent/questionview.dart';
 import '../QuizComponent/question.dart';
 import '../CommonComponnent/commoncomponent.dart';
 import '../QuizComponent/pdftitleview.dart';
+import "../url.dart";
 
 class QuizScreen extends StatefulWidget {
   final VoidCallback onBackTap;
@@ -29,11 +30,6 @@ class _QuizScreenState extends State<QuizScreen> {
   int _currentQuestionIndex = 0;
   final Map<int, String> _selectedAnswer = {};
   int? _currentDocumentId;
-
-  final String BackEndUrl = 'http://192.168.0.109:8000/api';
-
-
-
 
   Future<void> _pickFiles() async {
     try {
@@ -89,7 +85,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
     try {
       var request =
-      http.MultipartRequest("POST", Uri.parse("$BackEndUrl/makepdf/"));
+      http.MultipartRequest("POST", Uri.parse("${BackEndUrl}makepdf/"));
       request.headers["Authorization"] = "Token $token";
       request.files.add(
         await http.MultipartFile.fromPath("pdf", _selectedFile!.path),
@@ -132,7 +128,7 @@ class _QuizScreenState extends State<QuizScreen> {
     final String? token = prefs.getString("token");
 
     try {
-      var url = Uri.parse("$BackEndUrl/generate_quiz/");
+      var url = Uri.parse("${BackEndUrl}generate_quiz/");
 
       Map<String, dynamic> requestBody = {
         "document_id": documentId,
@@ -241,21 +237,19 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
 
-  // Inside _QuizScreenState in quizscreen.dart
-
   void _returnToTitleView() {
     setState(() {
-      _quizQuestions = null; // <--- This triggers the switch back to PDFTitleView
+      _quizQuestions = null;
       _currentQuestionIndex = 0;
       _selectedAnswer.clear();
-      _currentDocumentId = null; // Optional: Clear ID if you want fresh start
+      _currentDocumentId = null;
     });
   }
 
 
 
   Widget _buildBody() {
-  if (_isGenerating) return LoadView();
+  if (_isGenerating) return LoadView(fun: "Quiz",);
   if (_quizQuestions != null) {
     return QuizView(
       Questions: _quizQuestions!,
@@ -285,6 +279,7 @@ class _QuizScreenState extends State<QuizScreen> {
             onClearFile: _clearFile,
             onPickFile: _pickFiles,
             onGenerateQuiz: _GeneratePDFFromFile,
+            fun: "Quiz",
           ),
         ),
       ],
@@ -297,6 +292,7 @@ class _QuizScreenState extends State<QuizScreen> {
         _showUploadView = true;
       });
     },
+    fun:"Generate Quiz",
     onGenerateQuizTap: (String docIdString) {
       print("User selected document ID: $docIdString");
 

@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'screen/flashcardscreen.dart';
 import 'dart:convert';
+import 'url.dart';
 void main() => runApp(CramLand());
 
 class CramLand extends StatelessWidget {
@@ -56,7 +57,7 @@ class _MainScreenState extends State<MainScreen> {
 
       if (token != null) {
 
-        final url = Uri.parse('http://192.168.0.109:8000/api/logout/');
+        final url = Uri.parse('${BackEndUrl}logout/');
 
         final response = await http.post(
           url,

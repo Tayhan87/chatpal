@@ -1,7 +1,8 @@
 import "package:flutter/material.dart";
 
 class LoadView extends StatelessWidget{
-  const LoadView({super.key});
+  final String fun;
+  const LoadView({super.key,required this.fun});
 
   @override
   Widget build(BuildContext context){
@@ -19,7 +20,7 @@ class LoadView extends StatelessWidget{
           const SizedBox(height: 24,),
 
           Text(
-            "Generating quiz",
+            "Generating ${fun}",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,

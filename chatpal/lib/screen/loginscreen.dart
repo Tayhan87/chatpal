@@ -1,8 +1,10 @@
+import 'package:chatpal/url.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'signupscreen.dart';
+import '../url.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback onLoginSuccess;
@@ -60,8 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     try {
-      // Replace with your actual backend URL
-      final url = Uri.parse("http://192.168.0.109:8000/api/login/");
+      final url = Uri.parse("${BackEndUrl}login/");
 
       final response = await http.post(
         url,
@@ -81,11 +82,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
         _showSuccess("Login successful!");
 
-        // Optional: Store token or user data here
-        // SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('token', data['token']);
 
-        // Navigate to next screen
         await Future.delayed(const Duration(milliseconds: 500));
         widget.onLoginSuccess();
       } else {
